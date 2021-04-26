@@ -4,12 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
 import PageNotFound from "./pages/PageNotFound";
 import TestPage from "./pages/TestPage";
-import App from './App';
+import MainPage from './pages/MainPage';
 
 export default (
     <BrowserRouter basename="/wikiaves">
       <Switch>
-      <Route exact path="/" component={App} />
+      <Route exact path="/" component={MainPage} />
         <Route exact path="/login">
         <LoginPage />
         </Route>

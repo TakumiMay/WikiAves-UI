@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
-import myImg from '../../assets/images/bird1.jpg';
+import LoginCarousel from '../../components/LoginCarousel';
 
 import {
     Grid,
@@ -99,7 +99,9 @@ const LoginPage = (props) => {
                 <Grid item
                     xs={6}
                 >
-                    <img src={myImg} width="1000" height="500"/>
+                    <LoginCarousel>
+
+                    </LoginCarousel>
                 </Grid>
                 <Grid item
                     xs={6}

@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
-import { LOGOUT } from "../actions/constants";
+import { LOGOUT } from "../constants/constants";
 
 const appReducer = combineReducers({
 });
