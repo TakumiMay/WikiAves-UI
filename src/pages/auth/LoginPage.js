@@ -1,137 +1,129 @@
 /* eslint-disable no-unused-vars*/
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
+import { useHistory } from "react-router-dom";
 import LoginCarousel from '../../components/LoginCarousel';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import {
     Grid,
     Button,
     TextField,
-    Typography,
-    FormControlLabel
+    Link,
+    Paper
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
       backgroundColor: theme.palette.background.default,
-      height: "100%",
+      height: '100vh',
     },
-    grid: {
-      height: "100%",
-    },
-    content: {
-      height: '100%',
+    paper: {
+      margin: theme.spacing(8, 4),
       display: 'flex',
-      alignItems: 'auto',
-    },
-    contentHeader: {
-      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(2),
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
-    },
-    contentBody: {
-      flexGrow: 1,
-      display: 'flex',
-      alignItems: 'center',
-      [theme.breakpoints.down('md')]: {
-        justifyContent: 'auto'
-      }
+      backgroundColor: theme.palette.secondary,
     },
     form: {
-      margin: 'auto',
-      paddingLeft: 100,
-      paddingRight: 100,
-      paddingBottom: 125,
-      flexBasis: 700,
-      [theme.breakpoints.down('sm')]: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(2),
-      }
+      width: '100%',
+      marginTop: theme.spacing(1),
     },
-    title: {
-      marginTop: theme.spacing(3),
-    },
-    sugestion: {
-      marginTop: theme.spacing(2),
-    },
-    textField: {
-      marginTop: theme.spacing(2),
-    },
-    signInButton: {
-      margin: theme.spacing(1, 0),
+    submit: {
+      margin: theme.spacing(3, 0, 2),
     },
   }));
 
 const LoginPage = (props) => {
-    const classes = useStyles();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const classes = useStyles();
+  const history = useHistory();
 
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
+  const handleForgottenPwdButton = async(event) => {
+    history.push("/signUp");
   }
-
+  const handleSingUpButton = async(event) => {
+    history.push("/signUp");
+  }
   const handleSubmit = async(event) => {
     event.preventDefault();
   }
-  //const imags = {
-  //    currentImg: '/assets/images/bird1.jpg'
-  //}
 
   return (
-    <div className="Login">
-        <Grid
-            className={classes.grid}
-            container
-        >
-            <Grid
-                className={classes.content}
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                container
-            >
-                <Grid item
-                    xs={6}
-                >
-                    <LoginCarousel>
+    <Grid
+      container
+      className={classes.root}
+    >
+      <CssBaseline />
+      <Grid item
+        xs={false}
+        sm={4}
+        md={7}
+        alignItems="center"
+      >
+        <LoginCarousel></LoginCarousel>
+      </Grid>
+      <Grid item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+      >
+        <div className={classes.paper}>
+        <form className={classes.form}
+          onSubmit={handleSubmit}>
 
-                    </LoginCarousel>
-                </Grid>
-                <Grid item
-                    xs={6}
-                >
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Correo electrónico"
+            name="email"
+            autoComplete="email"
             autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Contraseña"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            id="password"
+            autoComplete="current-password"
           />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
-      </Form>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            Iniciar Sesión
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link onClick={handleForgottenPwdButton} variant="body2">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link onClick={handleSingUpButton} variant="body2">
+                {"¿No tienes una cuenta? Regístrate"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+        </div>
       </Grid>
-        </Grid>
-      </Grid>
-    </div>
+    </Grid>
   );
 }
 const mapStateToProps = (state) => ({
