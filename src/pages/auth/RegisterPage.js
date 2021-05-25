@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { useHistory } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import PermMediaIcon from '@material-ui/icons/PermMedia';
+import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import Footer from "../../components/Footer";
 import axios from 'axios';
 import {
@@ -15,9 +15,9 @@ import {
     Typography,
     InputLabel,
     Avatar,
+    Fab,
     Link,
 } from '@material-ui/core';
-import { Label } from "reactstrap";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(3),
     },
+    input: {
+        display: "none"
+    },
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
@@ -41,16 +44,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
     const state = {
+        mainState: "initial", // initial, search, gallery, uploaded
+        imageUploaded: 0,
         selectedFile: null
-    }
+    };
     const classes = useStyles();
     const history = useHistory();
 
-    const handleFileSelected = event => {
+    const handleUploadClick = event => {
+        console.log();
+        var file = event.target.files[0];
+        const reader = new FileReader();
+        var url = reader.readAsDataURL(file);
+    
+        reader.onloadend = function(e) {
+          this.setState({
+            selectedFile: [reader.result]
+          });
+        }.bind(this);
+        console.log(url); // Would see a path?
+    
         this.setState({
-            selectedFile: event.target.files[0]
-        })
-    }
+          mainState: "uploaded",
+          selectedFile: event.target.files[0],
+          imageUploaded: 1
+        });
+      };
 
     const handleLoginButton = async(event) => {
         history.push("/login");
@@ -129,14 +148,28 @@ export default function SignUp() {
                   autoComplete="region"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <InputLabel
                   variant="outlined"
-                  required
                   fullWidth
                 >
-                  <PermMediaIcon/> Agregar foto <input type="file" onChange={handleFileSelected} />
+                  Agregar foto
                 </InputLabel>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <input
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                    onChange={handleUploadClick}
+                />
+                <label htmlFor="contained-button-file">
+                <Fab component="span" className={classes.button}>
+                    <AddPhotoAlternateIcon />
+                </Fab>
+                </label>
               </Grid>
             </Grid>
             <Button
@@ -158,6 +191,7 @@ export default function SignUp() {
             </Grid>
           </form>
           <div>
+              <label></label>
               <label></label>
           </div>
           <footer className={classes.footer}>
