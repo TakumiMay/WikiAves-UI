@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ImmutablePropTypes from "react-immutable-proptypes";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { colors } from "../themes/theme";
+import { colors } from "../theme";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import {

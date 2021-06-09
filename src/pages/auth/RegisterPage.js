@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    footer: {
+      padding: theme.spacing(6),
+    },
 }));
 
 export default function SignUp() {

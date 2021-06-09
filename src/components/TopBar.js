@@ -1,9 +1,7 @@
 import React from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
-import messages from "../constants/messages";
 import {
     AppBar,
-    Badge,
     IconButton,
     InputBase,
     Menu,

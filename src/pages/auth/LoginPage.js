@@ -17,7 +17,6 @@ import {
     Link,
     Paper
 } from '@material-ui/core';
-import { propTypes } from "react-bootstrap/esm/Image";
 
 const useStyles = makeStyles((theme) => ({
     root: {
