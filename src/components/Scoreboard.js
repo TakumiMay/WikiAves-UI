@@ -11,12 +11,17 @@ const useStyles = makeStyles((theme) => ({
     icon: {
         fontSize: 50,
     },
+    item: {
+        padding: theme.spacing(3),
+    },
     text: {
         display: 'none',
         [theme.breakpoints.up('sm')]: {
-        display: 'block',
-        marginLeft: theme.spacing(1),
+            display: 'block',
         },
+    },
+    number: {
+        marginRight: theme.spacing(1),
     }
 }));
 const Scoreboard = (props) => {
@@ -28,15 +33,23 @@ const Scoreboard = (props) => {
             <Grid
                 container
                 direction="row"
+                justify="space-evenly"
             >
                 <Grid item
                     direction="column"
+                    justify="center"
                     alignItems="center"
+                    className={classes.item}
                 >
                     <Grid item
+                        direction="row"
+                        alignItems="center"
+                        container
                     >
+                        <Typography className={classes.number} variant="h4">
+                            12
+                        </Typography>
                         <EmojiEventsIcon className={classes.icon}></EmojiEventsIcon>
-                    
                     </Grid>
                     <Typography className={classes.text}>
                         Logros
@@ -44,11 +57,19 @@ const Scoreboard = (props) => {
                 </Grid>
                 <Grid item
                     direction="column"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.item}
                 >
                     <Grid item
+                        direction="row"
+                        alignItems="center"
+                        container
                     >
-                        <FaBinoculars className={classes.icon}></FaBinoculars>
-                       
+                        <Typography className={classes.number} variant="h4">
+                            12
+                        </Typography>
+                        <FaBinoculars className={classes.icon}></FaBinoculars>   
                     </Grid>
                     <Typography className={classes.text}>
                         Expediciones
@@ -56,11 +77,19 @@ const Scoreboard = (props) => {
                 </Grid>
                 <Grid item
                     direction="column"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.item}
                 >
                     <Grid item
+                        direction="row"
+                        alignItems="center"
+                        container
                     >
+                        <Typography className={classes.number} variant="h4">
+                            12
+                        </Typography>
                         <CollectionsIcon className={classes.icon}></CollectionsIcon>
-
                     </Grid>
                     <Typography className={classes.text}>
                         Fotografías
@@ -68,9 +97,18 @@ const Scoreboard = (props) => {
                 </Grid>
                 <Grid item
                     direction="column"
+                    justify="center"
+                    alignItems="center"
+                    className={classes.item}
                 >
                     <Grid item
+                        direction="row"
+                        alignItems="center"
+                        container
                     >
+                        <Typography className={classes.number} variant="h4">
+                            12
+                        </Typography>
                         <GiHummingbird className={classes.icon}></GiHummingbird>
                     </Grid>
                     <Typography className={classes.text}>

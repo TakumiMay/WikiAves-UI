@@ -1,17 +1,19 @@
 import React from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import SearchIcon from '@material-ui/icons/Search';
 import {
     AppBar,
+    Button,
     IconButton,
     InputBase,
     Menu,
     MenuItem,
     Toolbar,
     Typography,
-  } from "@material-ui/core";
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import SearchIcon from '@material-ui/icons/Search';
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -74,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TopBar() {
     const classes = useStyles();
+    const history = useHistory();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
@@ -81,6 +84,16 @@ export default function TopBar() {
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleOpenProfile = async(event) => {
+      history.push("/profile");
+    }
+    const handleOpenPosts = async(event) => {
+      history.push("/posts");
+    }
+    const handleSingOut = async(event) => {
+      history.push("/");
+    }
 
     const handleMenuClose = () => {
         setAnchorEl(null);
@@ -97,11 +110,15 @@ export default function TopBar() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Mis logros</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
+        <MenuItem onClick={handleOpenProfile}>Mi perfil</MenuItem>
+        <MenuItem onClick={handleOpenPosts}>Publicaciones</MenuItem>
+        <MenuItem onClick={handleSingOut}>Cerrar sesión</MenuItem>
       </Menu>
     );
+
+    const handleSearch = async(event) => {
+      event.preventDefault();
+    }
 
     return (
     <div className={classes.grow}>
@@ -115,7 +132,7 @@ export default function TopBar() {
                         <SearchIcon />
                     </div>
                     <InputBase
-                        placeholder="Buscar una especie"
+                        placeholder="Busca una especie"
                         classes={{
                             root: classes.inputRoot,
                             input: classes.inputInput,
@@ -123,6 +140,13 @@ export default function TopBar() {
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
+                <Button
+                  type="submit"
+                  color="inherit"
+                  onClick={handleSearch}
+                >
+                  Buscar
+                </Button>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
                 {/* <IconButton aria-label="show 17 new notifications" color="inherit">

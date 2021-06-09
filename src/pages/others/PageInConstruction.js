@@ -6,7 +6,6 @@ import {
     Button,
     Typography
 } from '@material-ui/core';
-import messages from "../constants/messages";
 
 const useStyles = makeStyles((theme) => ({
     root: {

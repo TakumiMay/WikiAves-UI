@@ -1,14 +1,20 @@
 import React from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, InputBase, Grid, Container } from "@material-ui/core";
 import HomeTopBar from "../components/HomeTopBar";
 import Footer from "../components/Footer";
-import Typography from '@material-ui/core/Typography';
 import messages from "../constants/messages";
 import SearchIcon from '@material-ui/icons/Search';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { 
+  CssBaseline, 
+  InputBase, 
+  Button,
+  Grid, 
+  Container,
+  Typography
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -99,6 +105,10 @@ const cards = [1, 2, 3];
 export default function MainPage() {
     const classes = useStyles();
 
+    const handleSearch = async(event) => {
+      event.preventDefault();
+    }
+    
     return (
         <React.Fragment>
             <CssBaseline />
@@ -122,6 +132,10 @@ export default function MainPage() {
                 <Typography variant="h7" align="center" color="secondary" paragraph>
                   {messages.appDescription3}
                 </Typography>
+                <Grid
+                  container
+                  direction="row"
+                >
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
                         <SearchIcon />
@@ -135,6 +149,15 @@ export default function MainPage() {
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
+                  <Button
+                    type="submit"
+                    color="inherit"
+                    variant="contained"
+                    onClick={handleSearch}
+                  >
+                    Buscar
+                  </Button>
+                </Grid>
               </Grid>
               
               <Container
