@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import StarsIcon from '@material-ui/icons/Stars';
 import {
     Grid,
     Button,
+    InputLabel,
     ListItem,
-    ListItemIcon,
-    ListItemText,
+    Typography,
     Paper
 } from '@material-ui/core';
 
@@ -22,6 +22,19 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
       backgroundColor: theme.palette.secondary,
     },
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+          display: 'block',
+        },
+    },
+    text: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+        display: 'block',
+        marginLeft: theme.spacing(1),
+        },
+    }
 }));
 
 const UserInfoBar = (props) => {
@@ -29,35 +42,51 @@ const UserInfoBar = (props) => {
 
     return (
         <Grid item
-            xs={6}
-            sm={4}
-            md={2}
             component={Paper}
             elevation={2}
             square
         >
         <div className={classes.paper}>
-            <AccountBoxIcon />
+            <AccountBoxIcon style={{ fontSize: 200 }}/>
             <ListItem>
-                <ListItemText primary="Daniel E. Guzmán" />
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Daniel E. Guzmán
+                </Typography>
+                
             </ListItem>
             <ListItem>
-                <ListItemIcon>
-                    <PersonIcon />
-                </ListItemIcon>
-                <ListItemText primary="@danes12" />
+                <PersonIcon />
+                <InputLabel className={classes.text}>
+                  @Danes34
+                </InputLabel>
             </ListItem>
             <ListItem>
-                <ListItemText primary="Una descripción libre del usuario" />
+                <LocationOnIcon />
+                <InputLabel className={classes.text}>
+                  Cali, Valle del Cauca
+                </InputLabel>
             </ListItem>
             <ListItem>
-                <ListItemIcon>
-                    <LocationOnIcon />
-                </ListItemIcon>
-                <ListItemText primary="Cali, Colombia" />
+                <InputLabel className={classes.text}>
+                Una descripción libre del usuario
+                </InputLabel>
             </ListItem>
+
+            <ListItem>
+                <LocationOnIcon />
+                <InputLabel className={classes.text}>
+                    Nivel: Cacique candela
+                </InputLabel>
+            </ListItem>
+            <ListItem>
+                <StarsIcon />
+                <InputLabel className={classes.text}>
+                    54 puntos de experiencia
+                </InputLabel>
+            </ListItem>
+            
         </div>
-      </Grid>
+        </Grid>
     );
 }
 const mapStateToProps = (state) => ({

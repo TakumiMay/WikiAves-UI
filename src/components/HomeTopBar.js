@@ -12,7 +12,20 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   title: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+      marginLeft: theme.spacing(3),
+    },
+  },
+  grow: {
     flexGrow: 1,
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
   },
 }));
 
@@ -39,16 +52,19 @@ export default function HomeTopBar() {
           <Typography variant="h6" className={classes.title}>
             WikiAves Icesi
           </Typography>
-          <Button color="inherit"
-            onClick={handleHomeButton}>Inicio</Button>
-          <Button color="inherit"
-            onClick={handleMenuButton}>Especies</Button>
-          <Button color="inherit"
-            onClick={handleMenuButton}>Aprende más</Button>
-          <Button color="inherit"
-            onClick={handleMenuButton}>Acerca de</Button>
-          <Button color="inherit"
-            onClick={handleLoginButton}>Iniciar Sesión</Button>
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <Button color="inherit"
+              onClick={handleHomeButton}>Inicio</Button>
+            <Button color="inherit"
+              onClick={handleMenuButton}>Especies</Button>
+            <Button color="inherit"
+              onClick={handleMenuButton}>Aprende más</Button>
+            <Button color="inherit"
+              onClick={handleMenuButton}>Acerca de</Button>
+            <Button color="inherit"
+              onClick={handleLoginButton}>Iniciar Sesión</Button>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

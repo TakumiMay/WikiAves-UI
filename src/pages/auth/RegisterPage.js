@@ -6,7 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import Footer from "../../components/Footer";
-import axios from 'axios';
 import {
     Container,
     Grid,
@@ -52,7 +51,6 @@ export default function SignUp() {
     const history = useHistory();
 
     const handleUploadClick = event => {
-        console.log();
         var file = event.target.files[0];
         const reader = new FileReader();
         var url = reader.readAsDataURL(file);
@@ -62,7 +60,6 @@ export default function SignUp() {
             selectedFile: [reader.result]
           });
         }.bind(this);
-        console.log(url); // Would see a path?
     
         this.setState({
           mainState: "uploaded",
@@ -99,7 +96,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="Nombre completo"
+                  label="Nombres"
                   autoFocus
                 />
               </Grid>
@@ -109,9 +106,20 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Nombre de usuario"
+                  label="Apellidos"
                   name="lastName"
-                  autoComplete="nname"
+                  autoComplete="lname"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Nombre de usuario"
+                  name="username"
+                  autoComplete="uname"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -137,7 +145,7 @@ export default function SignUp() {
                   autoComplete="current-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
                   required
@@ -146,6 +154,17 @@ export default function SignUp() {
                   label="Región"
                   name="region"
                   autoComplete="region"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="city"
+                  label="Ciudad"
+                  name="city"
+                  autoComplete="city"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

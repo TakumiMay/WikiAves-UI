@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from "react-router-dom";
 import LoginCarousel from '../../components/LoginCarousel';
+import { login } from '../../actions/auth/actionAuth';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import validate from 'validate.js';
 import {
     Grid,
     Button,
     TextField,
+    Typography,
     Link,
     Paper
 } from '@material-ui/core';
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,21 +38,67 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    title: {
+      display: 'none',
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
+      },
+    },
 }));
+
+const schema = {
+  User: {
+    presence: { allowEmpty: false, message: "es requerido" },
+    length: {
+      maximum: 64,
+    },
+  },
+  password: {
+    presence: { allowEmpty: false, message: "es requerido" },
+    length: {
+      minimum: 2,
+      maximum: 64,
+      message: "longitud no adecuada",
+    },
+  },
+};
 
 const LoginPage = (props) => {
   const classes = useStyles();
   const history = useHistory();
-
   const handleForgottenPwdButton = async(event) => {
     history.push("/signUp");
   }
   const handleSingUpButton = async(event) => {
     history.push("/signUp");
   }
+
+  const { isLoggedIn } = props;
+  if(isLoggedIn ==='Y')  {
+    history.push("/profile")
+  }
+
+  const dispatch = useDispatch();
   const handleSubmit = async(event) => {
+    dispatch(login(formState.values.User, formState.values.password));
     event.preventDefault();
   }
+
+  const [formState, setFormState] = useState({
+    isValid: false,
+    values: {},
+    errors: {},
+  });
+  const hasError = (field) =>
+    formState.errors[field] ? true : false;
+  useEffect(() => {
+    const errors = validate(formState.values, schema);
+  setFormState((formState) => ({
+      ...formState,
+      isValid: errors ? false : true,
+      errors: errors || {},
+    }));
+  }, [formState.values]);
 
   return (
     <Grid
@@ -61,6 +112,9 @@ const LoginPage = (props) => {
         md={7}
         alignItems="center"
       >
+        <Typography className={classes.title} variant="h6" noWrap>
+          WikiAves Icesi
+        </Typography>
         <LoginCarousel></LoginCarousel>
       </Grid>
       <Grid item
@@ -78,13 +132,18 @@ const LoginPage = (props) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            
             fullWidth
             id="email"
-            label="Correo electrónico"
-            name="email"
-            autoComplete="email"
+            label="Usuario"
+            name="User"
+            autoComplete="User"
             autoFocus
+            value={formState.values.User || ""}
+            error={hasError("User")}
+            helperText={
+              hasError("User") ? "El nombre de usuario es requerido" : null
+            }
           />
 
           <TextField
@@ -96,7 +155,11 @@ const LoginPage = (props) => {
             label="Contraseña"
             type="password"
             id="password"
-            autoComplete="current-password"
+            value={formState.values.password || ""}
+            error={hasError("password")}
+            helperText={
+              hasError("password") ? "La contraseña es requerida" : null
+            }
           />
           <Button
             type="submit"
@@ -105,6 +168,7 @@ const LoginPage = (props) => {
             color="primary"
             className={classes.submit}
             onClick={handleSubmit}
+            disabled={!formState.isValid}
           >
             Iniciar Sesión
           </Button>
@@ -126,7 +190,17 @@ const LoginPage = (props) => {
     </Grid>
   );
 }
-const mapStateToProps = (state) => ({
-});
+LoginPage.propTypes = {
+  history: PropTypes.object,
+  isLoggedIn: PropTypes.bool,
+  username: PropTypes.string,
+};
 
-export default connect(mapStateToProps)(LoginPage);
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: state.auth.isLoggedIn,
+    username: state.auth.username,
+  }
+};
+
+export default connect(mapStateToProps, {})(LoginPage);

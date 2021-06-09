@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
+        marginLeft: theme.spacing(3),
       },
     },
     search: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
+        marginLeft: theme.spacing(6),
         width: 'auto',
       },
     },
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('md')]: {
-        width: '20ch',
+        width: '30ch',
       },
     },
     sectionDesktop: {
@@ -98,8 +99,9 @@ export default function TopBar() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Mi perfil</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Mis logros</MenuItem>
+        <MenuItem onClick={handleMenuClose}>Cerrar sesión</MenuItem>
       </Menu>
     );
 
@@ -110,13 +112,12 @@ export default function TopBar() {
                 <Typography className={classes.title} variant="h6" noWrap>
                     WikiAves Icesi
                 </Typography>
-
                 <div className={classes.search}>
                     <div className={classes.searchIcon}>
                         <SearchIcon />
                     </div>
                     <InputBase
-                        placeholder="Search…"
+                        placeholder="Buscar una especie"
                         classes={{
                             root: classes.inputRoot,
                             input: classes.inputInput,
@@ -126,11 +127,11 @@ export default function TopBar() {
                 </div>
                 <div className={classes.grow} />
                 <div className={classes.sectionDesktop}>
-                <IconButton aria-label="show 17 new notifications" color="inherit">
+                {/* <IconButton aria-label="show 17 new notifications" color="inherit">
                     <Badge badgeContent={17} color="secondary">
                         <NotificationsIcon />
                     </Badge>
-                </IconButton>
+                </IconButton> */}
                 <IconButton
                     edge="end"
                     aria-label="account of current user"
