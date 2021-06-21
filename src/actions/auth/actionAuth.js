@@ -16,11 +16,11 @@ export function login(username, password) {
       username,
       password
   }
-
+  console.log("holaaaa jeje")
   return {
     type: LOGIN,
     async payload () {
-        return await axios.post("/login", data)      
+        return await axios.post("login/", data)      
     }
   };
 }

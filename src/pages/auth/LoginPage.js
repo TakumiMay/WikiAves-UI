@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars*/
 import React, { useState, useEffect } from "react";
+import { Link as RouterLink, withRouter, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
-import { useHistory } from "react-router-dom";
 import LoginCarousel from '../../components/LoginCarousel';
 import { login } from '../../actions/auth/actionAuth';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
+      margin: theme.spacing(3, 1, 3),
     },
 }));
 
@@ -65,39 +66,54 @@ const schema = {
 const LoginPage = (props) => {
   const classes = useStyles();
   const history = useHistory();
-  const handleForgottenPwdButton = async(event) => {
-    history.push("/signUp");
-  }
-  const handleSingUpButton = async(event) => {
-    history.push("/signUp");
-  }
+  const dispatch = useDispatch();
 
   const { isLoggedIn } = props;
-  if(isLoggedIn ==='Y')  {
-    history.push("/profile")
-  }
-
-  const dispatch = useDispatch();
-  const handleSubmit = async(event) => {
-    dispatch(login(formState.values.User, formState.values.password));
-    event.preventDefault();
-  }
-
+  
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
+    touched: {},
     errors: {},
   });
-  const hasError = (field) =>
-    formState.errors[field] ? true : false;
+
   useEffect(() => {
     const errors = validate(formState.values, schema);
-  setFormState((formState) => ({
+  
+    setFormState((formState) => ({
       ...formState,
       isValid: errors ? false : true,
       errors: errors || {},
     }));
   }, [formState.values]);
+
+  if(isLoggedIn ==='Y')  {
+    history.push("/profile")
+  }
+
+  const handleChange = (event) => {
+    event.persist();
+
+    setFormState((formState) => ({
+      ...formState,
+      values: {
+        ...formState.values,
+        [event.target.name]: event.target.value,
+      },
+      touched: {
+        ...formState.touched,
+        [event.target.name]: true,
+      },
+    }));
+  };
+
+  const hasError = (field) => 
+    formState.touched[field] && formState.errors[field] ? true : false;
+  
+  const handleSubmit = event => {
+    dispatch(login(formState.values.User, formState.values.password));
+    event.preventDefault();
+  }
 
   return (
     <Grid
@@ -131,7 +147,7 @@ const LoginPage = (props) => {
           <TextField
             variant="outlined"
             margin="normal"
-            
+            onChange={handleChange}
             fullWidth
             id="email"
             label="Usuario"
@@ -153,7 +169,7 @@ const LoginPage = (props) => {
             name="password"
             label="Contraseña"
             type="password"
-            id="password"
+            onChange={handleChange}
             value={formState.values.password || ""}
             error={hasError("password")}
             helperText={
@@ -173,12 +189,12 @@ const LoginPage = (props) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link onClick={handleForgottenPwdButton} variant="body2">
+              <Link component={RouterLink} to="/signUp" variant="body2">
                 ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
             <Grid item>
-              <Link onClick={handleSingUpButton} variant="body2">
+              <Link component={RouterLink} to="/signUp" variant="body2">
                 {"¿No tienes una cuenta? Regístrate"}
               </Link>
             </Grid>
@@ -202,4 +218,4 @@ function mapStateToProps(state) {
   }
 };
 
-export default connect(mapStateToProps, {})(LoginPage);
+export default connect(mapStateToProps, {})(withRouter(LoginPage));

@@ -1,7 +1,11 @@
 import { combineReducers } from "redux";
 import { LOGOUT } from "../constants/constants";
+import AuthReducer from "./reducerAuth";
+import RegisterReducer from "./reducerRegister";
 
 const appReducer = combineReducers({
+  auth: AuthReducer,
+  register: RegisterReducer,
 });
 
 const rootReducer = (state, action) => {
