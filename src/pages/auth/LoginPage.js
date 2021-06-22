@@ -109,12 +109,7 @@ const LoginPage = (props) => {
   const handleSubmit = event => {
     dispatch(startLogin(formState.values.User, formState.values.password))
     event.preventDefault();
-
-    if(isLoggedIn)  {
-      console.log("ifi")
-      console.log(isLoggedIn)
-      history.push("/profile")
-    }
+    history.push("/profile")
   }
 
   return (

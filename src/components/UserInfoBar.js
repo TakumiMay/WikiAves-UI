@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
+import { loadUserData } from '../actions/loadUserData';
+import { useDispatch } from 'react-redux';
 import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import KeyboardCapslockIcon from '@material-ui/icons/KeyboardCapslock';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import EmailIcon from '@material-ui/icons/Email';
 import StarsIcon from '@material-ui/icons/Stars';
 import {
     Grid,
-    Button,
     InputLabel,
     ListItem,
     Typography,
@@ -39,6 +42,11 @@ const useStyles = makeStyles((theme) => ({
 
 const UserInfoBar = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUserData());
+    }, []);
 
     return (
         <Grid item
@@ -50,38 +58,39 @@ const UserInfoBar = (props) => {
             <AccountBoxIcon style={{ fontSize: 200 }}/>
             <ListItem>
                 <Typography className={classes.title} variant="h6" noWrap>
-                    Daniel E. Guzmán
+                    {localStorage.getItem('name')+" "+localStorage.getItem('last_names')}
                 </Typography>
                 
             </ListItem>
             <ListItem>
                 <PersonIcon />
                 <InputLabel className={classes.text}>
-                  @Danes34
+                    {"@"+localStorage.getItem('username')}
                 </InputLabel>
             </ListItem>
             <ListItem>
                 <LocationOnIcon />
                 <InputLabel className={classes.text}>
-                  Cali, Valle del Cauca
+                    {localStorage.getItem('city')+", "+localStorage.getItem('region')}
                 </InputLabel>
             </ListItem>
             <ListItem>
+                <EmailIcon />
                 <InputLabel className={classes.text}>
-                Una descripción libre del usuario
+                    {localStorage.getItem('email')}
                 </InputLabel>
             </ListItem>
 
             <ListItem>
-                <LocationOnIcon />
+                <KeyboardCapslockIcon />
                 <InputLabel className={classes.text}>
-                    Nivel: Cacique candela
+                    {"Nivel: "+localStorage.getItem('level')}
                 </InputLabel>
             </ListItem>
             <ListItem>
                 <StarsIcon />
                 <InputLabel className={classes.text}>
-                    54 puntos de experiencia
+                    {localStorage.getItem('experience')+" puntos de experiencia"}
                 </InputLabel>
             </ListItem>
             

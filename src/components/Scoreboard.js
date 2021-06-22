@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from '@material-ui/styles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
@@ -6,6 +6,8 @@ import CollectionsIcon from '@material-ui/icons/Collections';
 import { Grid, Typography } from "@material-ui/core";
 import { GiHummingbird } from 'react-icons/gi';
 import { FaBinoculars } from 'react-icons/fa';
+import { loadUserData } from '../actions/loadUserData';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -26,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Scoreboard = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadUserData());
+    }, []);
 
     return (
         <React.Fragment>
@@ -47,7 +54,7 @@ const Scoreboard = (props) => {
                         container
                     >
                         <Typography className={classes.number} variant="h4">
-                            12
+                            {localStorage.getItem('achievements')}
                         </Typography>
                         <EmojiEventsIcon className={classes.icon}></EmojiEventsIcon>
                     </Grid>
@@ -67,7 +74,7 @@ const Scoreboard = (props) => {
                         container
                     >
                         <Typography className={classes.number} variant="h4">
-                            12
+                            {localStorage.getItem('expeditions')}
                         </Typography>
                         <FaBinoculars className={classes.icon}></FaBinoculars>   
                     </Grid>
@@ -87,7 +94,7 @@ const Scoreboard = (props) => {
                         container
                     >
                         <Typography className={classes.number} variant="h4">
-                            12
+                            {localStorage.getItem('photos')}
                         </Typography>
                         <CollectionsIcon className={classes.icon}></CollectionsIcon>
                     </Grid>
@@ -107,7 +114,7 @@ const Scoreboard = (props) => {
                         container
                     >
                         <Typography className={classes.number} variant="h4">
-                            12
+                            {localStorage.getItem('species')}
                         </Typography>
                         <GiHummingbird className={classes.icon}></GiHummingbird>
                     </Grid>

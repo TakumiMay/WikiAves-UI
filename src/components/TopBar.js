@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import SearchIcon from '@material-ui/icons/Search';
+import { logout } from '../actions/auth/actionAuth';
+import { useDispatch } from 'react-redux';
 import {
     AppBar,
     Button,
@@ -77,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TopBar() {
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
@@ -92,6 +95,8 @@ export default function TopBar() {
       history.push("/posts");
     }
     const handleSingOut = async(event) => {
+      dispatch(logout());
+      localStorage.clear();
       history.push("/");
     }
 
