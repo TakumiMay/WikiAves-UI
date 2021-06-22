@@ -4,7 +4,7 @@ import { Link as RouterLink, withRouter, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
 import LoginCarousel from '../../components/LoginCarousel';
-import { login } from '../../actions/auth/actionAuth';
+import { startLogin } from '../../actions/auth/actionAuth';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -87,10 +87,6 @@ const LoginPage = (props) => {
     }));
   }, [formState.values]);
 
-  if(isLoggedIn ==='Y')  {
-    history.push("/profile")
-  }
-
   const handleChange = (event) => {
     event.persist();
 
@@ -111,8 +107,14 @@ const LoginPage = (props) => {
     formState.touched[field] && formState.errors[field] ? true : false;
   
   const handleSubmit = event => {
-    dispatch(login(formState.values.User, formState.values.password));
+    dispatch(startLogin(formState.values.User, formState.values.password))
     event.preventDefault();
+
+    if(isLoggedIn)  {
+      console.log("ifi")
+      console.log(isLoggedIn)
+      history.push("/profile")
+    }
   }
 
   return (

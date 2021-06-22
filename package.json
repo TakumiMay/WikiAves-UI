@@ -30,6 +30,7 @@
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
+    "sweetalert2": "^11.0.18",
     "validate.js": "^0.13.1",
     "web-vitals": "^1.0.1"
   },

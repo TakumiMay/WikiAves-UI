@@ -1,5 +1,6 @@
 import { LOGIN, LOGOUT } from '../../constants/constants';
-import axios from '../../utils/axios';
+import { notification, timerNotification } from "../../helpers/alert";
+import { fetchWithoutToken } from "../../helpers/fetch";
 
 export function logout() {
   return {
@@ -10,17 +11,37 @@ export function logout() {
   };
 }
 
-export function login(username, password) {
+export const startLogin = (username, password) => {
+  return async( dispatch ) => {
+    const response = await fetchWithoutToken(
+                            'login/',
+                            { username, password },
+                            'POST')
+    const body = await response.json();
 
-  let data=  {
-      username,
-      password
-  }
-  console.log("holaaaa jeje")
-  return {
-    type: LOGIN,
-    async payload () {
-        return await axios.post("login/", data)      
+    console.log(body);
+    console.log(response.status);
+
+    if ( response.status === 200 || response.status === 201) {
+      // set user info
+      localStorage.setItem('token', body.token);
+      localStorage.setItem('username', body.user.username);
+
+      dispatch( login({
+        token: body.token,
+        username: body.user.username
+      }) );
+
+      timerNotification( 'Inicio de Sesión exitoso!' );
+
+    } else {
+      notification( 'ERROR',body.error,'error' );
     }
-  };
+
+  }
 }
+
+const login = ( user ) => ({
+  type: LOGIN,
+  payload: user
+})
