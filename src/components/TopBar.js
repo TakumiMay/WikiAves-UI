@@ -3,6 +3,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import SearchIcon from '@material-ui/icons/Search';
 import { logout } from '../actions/auth/actionAuth';
 import { useDispatch } from 'react-redux';
@@ -94,6 +95,9 @@ export default function TopBar() {
     const handleOpenPosts = async(event) => {
       history.push("/posts");
     }
+    const handleOpenRanking = async(event) => {
+      history.push("/ranking");
+    }
     const handleSingOut = async(event) => {
       dispatch(logout());
       localStorage.clear();
@@ -116,7 +120,6 @@ export default function TopBar() {
         onClose={handleMenuClose}
       >
         <MenuItem onClick={handleOpenProfile}>Mi perfil</MenuItem>
-        <MenuItem onClick={handleOpenPosts}>Publicaciones</MenuItem>
         <MenuItem onClick={handleSingOut}>Cerrar sesión</MenuItem>
       </Menu>
     );
@@ -159,6 +162,20 @@ export default function TopBar() {
                         <NotificationsIcon />
                     </Badge>
                 </IconButton> */}
+                <Button
+                  type="submit"
+                  color="inherit"
+                  onClick={handleOpenPosts}
+                >
+                  Explora
+                </Button>
+                <IconButton 
+                  aria-label="show 17 new notifications" 
+                  color="inherit"
+                  onClick={handleOpenRanking}>
+                    <PeopleAltIcon />
+                </IconButton>
+                
                 <IconButton
                     edge="end"
                     aria-label="account of current user"

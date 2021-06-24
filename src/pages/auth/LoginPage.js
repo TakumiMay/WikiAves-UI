@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
       },
       margin: theme.spacing(3, 1, 3),
     },
+    space: {
+      paddingTop: theme.spacing(18),
+    }
 }));
 
 const schema = {
@@ -138,6 +141,7 @@ const LoginPage = (props) => {
         square
       >
         <div className={classes.paper}>
+          <div className={classes.space}></div>
         <form className={classes.form}
           onSubmit={handleSubmit}>
 

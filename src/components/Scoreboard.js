@@ -15,14 +15,17 @@ const useStyles = makeStyles((theme) => ({
     },
     item: {
         padding: theme.spacing(3),
+        marginTop: theme.spacing(3),
     },
     text: {
         display: 'none',
+        textAlign: 'center',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
         },
     },
     number: {
+        marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
     }
 }));
@@ -51,6 +54,7 @@ const Scoreboard = (props) => {
                     <Grid item
                         direction="row"
                         alignItems="center"
+                        justify="space-evenly"
                         container
                     >
                         <Typography className={classes.number} variant="h4">
@@ -71,6 +75,7 @@ const Scoreboard = (props) => {
                     <Grid item
                         direction="row"
                         alignItems="center"
+                        justify="space-evenly"
                         container
                     >
                         <Typography className={classes.number} variant="h4">
@@ -91,6 +96,7 @@ const Scoreboard = (props) => {
                     <Grid item
                         direction="row"
                         alignItems="center"
+                        justify="space-evenly"
                         container
                     >
                         <Typography className={classes.number} variant="h4">
@@ -111,6 +117,7 @@ const Scoreboard = (props) => {
                     <Grid item
                         direction="row"
                         alignItems="center"
+                        justify="space-evenly"
                         container
                     >
                         <Typography className={classes.number} variant="h4">

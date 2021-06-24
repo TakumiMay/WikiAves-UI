@@ -3,7 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from "react-router-dom";
-import UserInfoBar from "../../components/UserInfoBar"
+import UserInfoBar from "../../components/UserInfoBar";
 import TopBar from "../../components/TopBar";
 import Scoreboard from "../../components/Scoreboard";
 import {

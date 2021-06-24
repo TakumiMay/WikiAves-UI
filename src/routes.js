@@ -10,6 +10,7 @@ import PageInConstruction from "./pages/others/PageInConstruction";
 import UserDashboard from "./pages/user/UserDashboard";
 import SinglePost from "./pages/post/SinglePost";
 import UserPosts from "./pages/post/UserPosts";
+import Ranking from "./pages/user/Ranking";
 
 export default (
     <BrowserRouter basename="/wikiaves">
@@ -24,6 +25,7 @@ export default (
 
         <Route path="/post" component={SinglePost} />
         <Route path="/posts" component={UserPosts} />
+        <Route path="/ranking" component={Ranking} />
         
         <Route path="/underConstructionPage" component={PageInConstruction} />
         <Route path="/testPage" component={TestPage} />

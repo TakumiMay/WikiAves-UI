@@ -9,7 +9,7 @@ export const logout = () => {
       console.log("Sesión cerrada")
       localStorage.clear();   
     }
-  };
+  }
 }
 
 export const startLogin = (username, password) => {
@@ -46,7 +46,6 @@ export const startLogin = (username, password) => {
       localStorage.setItem('expeditions', body2.expeditions);
       localStorage.setItem('photos', body2.photos);
       localStorage.setItem('species', body2.species);
-      localStorage.setItem('region', body2.region);
       //console.log(body2)
 
       dispatch( login({
@@ -91,7 +90,6 @@ export const startChecking = () => {
         localStorage.setItem('expeditions', body2.expeditions);
         localStorage.setItem('photos', body2.photos);
         localStorage.setItem('species', body2.species);
-        localStorage.setItem('region', body2.region);
         
         dispatch( login({
               token: body.token,

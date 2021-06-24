@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { useHistory } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
+import validate from 'validate.js';
 import Footer from "../../components/Footer";
+import { register } from '../../actions/auth/actionRegister';
 import {
     Container,
     Grid,
     Button,
     TextField,
     Typography,
-    InputLabel,
     Avatar,
-    Fab,
     Link,
 } from '@material-ui/core';
 
@@ -52,6 +53,7 @@ export default function SignUp() {
     };
     const classes = useStyles();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const handleUploadClick = event => {
         var file = event.target.files[0];
@@ -75,8 +77,91 @@ export default function SignUp() {
         history.push("/login");
     }
 
+    const schema = {
+      password: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          minimum: 2,
+          maximum: 64,
+          message: "longitud no adecuada",
+        },
+      },
+      name: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+      last_names: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+      username: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+      email: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+      city: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+      region: {
+        presence: { allowEmpty: false, message: "es requerido" },
+        length: {
+          maximum: 64,
+        },
+      },
+    };
+    const [formState, setFormState] = useState({
+      isValid: false,
+      values: {},
+      touched: {},
+      errors: {},
+    });
+
+    useEffect(() => {
+      const errors = validate(formState.values, schema);
+      setFormState((formState) => ({
+        ...formState,
+        isValid: errors ? false : true,
+        errors: errors || {},
+      }));
+    }, [formState.values]);
+    const handleChange = (event) => {
+      event.persist();
+  
+      setFormState((formState) => ({
+        ...formState,
+        values: {
+          ...formState.values,
+          [event.target.name]: event.target.value,
+        },
+        touched: {
+          ...formState.touched,
+          [event.target.name]: true,
+        },
+      }));
+    };
+    const hasError = (field) => 
+    formState.touched[field] && formState.errors[field] ? true : false;
+
     const handleSubmit = async(event) => {
+        dispatch(register(formState.values.password, formState.values.name, 
+          formState.values.last_names, formState.values.username, formState.values.email,
+          formState.values.city, formState.values.region, 0, 0))
         event.preventDefault();
+        history.push("/login")
     }
 
     return (
@@ -93,14 +178,20 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="fname"
-                  name="firstName"
+                  autoComplete="name"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Nombres"
                   autoFocus
+                  onChange={handleChange}
+                  value={formState.values.name || ""}
+                  error={hasError("name")}
+                  helperText={
+                    hasError("name") ? "El nombre es requerido" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -108,10 +199,16 @@ export default function SignUp() {
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
+                  id="last_names"
                   label="Apellidos"
-                  name="lastName"
-                  autoComplete="lname"
+                  name="last_names"
+                  autoComplete="last_names"
+                  onChange={handleChange}
+                  value={formState.values.last_names || ""}
+                  error={hasError("last_names")}
+                  helperText={
+                    hasError("last_names") ? "El apellido es requerido" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,7 +219,13 @@ export default function SignUp() {
                   id="username"
                   label="Nombre de usuario"
                   name="username"
-                  autoComplete="uname"
+                  autoComplete="username"
+                  onChange={handleChange}
+                  value={formState.values.username || ""}
+                  error={hasError("username")}
+                  helperText={
+                    hasError("username") ? "El nombre de usuario es requerido" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,6 +237,12 @@ export default function SignUp() {
                   label="Correo electrónico"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
+                  value={formState.values.email || ""}
+                  error={hasError("email")}
+                  helperText={
+                    hasError("email") ? "El email es requerido" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -146,6 +255,12 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={handleChange}
+                  value={formState.values.password || ""}
+                  error={hasError("password")}
+                  helperText={
+                    hasError("password") ? "La contraseña es requerida" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -157,6 +272,12 @@ export default function SignUp() {
                   label="Región"
                   name="region"
                   autoComplete="region"
+                  onChange={handleChange}
+                  value={formState.values.region || ""}
+                  error={hasError("region")}
+                  helperText={
+                    hasError("region") ? "La region es requerida" : null
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -168,17 +289,23 @@ export default function SignUp() {
                   label="Ciudad"
                   name="city"
                   autoComplete="city"
+                  onChange={handleChange}
+                  value={formState.values.city || ""}
+                  error={hasError("city")}
+                  helperText={
+                    hasError("city") ? "La ciudad es requerida" : null
+                  }
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <InputLabel
                   variant="outlined"
                   fullWidth
                 >
                   Agregar foto
                 </InputLabel>
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              </Grid> */}
+              {/* <Grid item xs={12} sm={6}>
                 <input
                     accept="image/*"
                     className={classes.input}
@@ -192,7 +319,7 @@ export default function SignUp() {
                     <AddPhotoAlternateIcon />
                 </Fab>
                 </label>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
@@ -201,6 +328,7 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
               onClick={handleSubmit}
+              disabled={!formState.isValid}
             >
               Crear cuenta
             </Button>

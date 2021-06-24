@@ -1,5 +1,6 @@
 import React from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 import HomeTopBar from "../components/HomeTopBar";
 import Footer from "../components/Footer";
 import messages from "../constants/messages";
@@ -104,9 +105,10 @@ const cards = [1, 2, 3];
 
 export default function MainPage() {
     const classes = useStyles();
+    const history = useHistory();
 
     const handleSearch = async(event) => {
-      event.preventDefault();
+      history.push("/login");
     }
     
     return (
