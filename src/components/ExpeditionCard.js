@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ImmutablePropTypes from "react-immutable-proptypes";
+//import ImmutablePropTypes from "react-immutable-proptypes";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { colors } from "../theme";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import {
     Avatar,
     Button,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ExpeditionCard({ expedition, openSightings, onDelete}) {
+function ExpeditionCard({ bird }) {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -51,29 +51,38 @@ function ExpeditionCard({ expedition, openSightings, onDelete}) {
         md={4}>
           <Card className={classes.card}>
             <CardHeader
-              avatar={
-              <Avatar
-                aria-label="recipe"
-                style={{ color: "white" }}
-              >
-                {expedition.get("name")}
-              </Avatar>
-              }
-              title={expedition.get("name")}
+              // avatar={
+              // <Avatar
+              //   aria-label="recipe"
+              //   style={{ color: "white" }}
+              // >
+              //   {//expedition.get("name")
+              //   }
+              // </Avatar>
+              // }
+              //title={expedition.get("name")}
+              title={bird.get("common_name")}
+              subheader="Nombre comuncito"
             >
+            <CardMedia
+              className={classes.media}
+              image="C:\Users\Mayumi\Documents\PDG\WikiAves-gamification-module\WikiAves-UI\src\assets\bitd1.jpg"
+              title="Paella dish"
+            />
             <CardContent className={classes.cardContent}>
               <Typography
                 style={{ color: colors.grey800 }}
               >
+                Fecha: 23-07-1999
                 {
-                  expedition.get("expeditionDate")
+                  //expedition.get("expeditionDate")
                 }
               </Typography>
               <Typography
                 style={{ color: colors.grey800 }}
               >
                 {
-                  expedition.get("expeditionRegion")
+                  //expedition.get("expeditionRegion")
                 }
               </Typography>
             </CardContent>
@@ -86,6 +95,14 @@ function ExpeditionCard({ expedition, openSightings, onDelete}) {
                 <VisibilityIcon style={{ marginRight: "5px" }} />
                 {"Ver  avistamientos"}
               </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => setOpen(true)}
+              >
+                <ThumbUpIcon style={{ marginRight: "5px" }} />
+                {"4"}
+              </Button>
             </CardActions>
             </CardHeader>
           </Card>
@@ -94,7 +111,7 @@ function ExpeditionCard({ expedition, openSightings, onDelete}) {
 }
 
 ExpeditionCard.propTypes = {
-    expedition: ImmutablePropTypes.map.isRequired,
+    //expedition: ImmutablePropTypes.map.isRequired,
     index: PropTypes.number.isRequired,
     openSightings: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired

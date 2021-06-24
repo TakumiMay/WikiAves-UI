@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage';
 import PageInConstruction from "./pages/others/PageInConstruction";
 import UserDashboard from "./pages/user/UserDashboard";
 import SinglePost from "./pages/post/SinglePost";
-import UserPosts from "./pages/post/UserPosts";
+import Posts from "./pages/post/Posts";
 import Ranking from "./pages/user/Ranking";
 
 export default (
@@ -24,7 +24,7 @@ export default (
         <Route path="/profile" component={UserDashboard} />
 
         <Route path="/post" component={SinglePost} />
-        <Route path="/posts" component={UserPosts} />
+        <Route path="/posts" component={Posts} />
         <Route path="/ranking" component={Ranking} />
         
         <Route path="/underConstructionPage" component={PageInConstruction} />

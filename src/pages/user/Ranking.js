@@ -33,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
           marginTop: theme.spacing(4),
         },
     },
+    text: {
+        fontWeight: 'bold',
+    },
     filter: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
@@ -98,34 +101,35 @@ const Ranking = () => {
     const [rows, setRows] = useState([]);
 
     const handleFilter = async(event) => {
-        console.log("se filtrara por: "+filterRegion);
+        //console.log("se filtrara por: "+filterRegion);
         async function loadedUsers(){
-            const response = await fetchWithToken(`users/ranking/${filterRegion}`);
-            const body = response.json();
-            console.log(body);
-            //setRows(body);
+            const response = await fetchWithToken(`users/ranking/${filterRegion}`)
+            response.json().then(
+                data =>  setRows(data)
+                )
+            //console.log(rows);
         }
         loadedUsers();
-        //window.location.reload(false);
     }
+    
     const handleGetRanking = async(event) => {
         async function loadedUsers(){
             const response = await fetchWithToken(`users/ranking`);
-            const body = response.json();
-            //setRows(body);
+            response.json().then(
+                data =>  setRows(data)
+                )
+            //console.log(rows);
         }
         loadedUsers();
-        //window.location.reload(false);
     }
 
     useEffect(() => {
         async function loadedUsers(){
-          const response = await fetchWithToken(`users/ranking`);
-          const body = response.json();
-          console.log("este es el response:")
-          console.log(body);
-          //setRows(body.);
-          console.log(rows);
+            const response = await fetchWithToken(`users/ranking`);
+            response.json().then(
+                data =>  setRows(data)
+            )
+            //console.log(rows);
         }
         loadedUsers();
     }, []);
@@ -140,7 +144,7 @@ const Ranking = () => {
                 direction="column"
             >
                 <Typography className={classes.title} variant="h6" noWrap>
-                    Ranking de usuarios
+                    Ranking de usuarios de WikiAves según su experiencia
                 </Typography>
                 <Grid
                     container
@@ -153,7 +157,7 @@ const Ranking = () => {
                                 <FilterListIcon />
                             </div>
                             <InputBase
-                                placeholder="Filtrar por región"
+                                placeholder="Ingresa la región para filtrar... "
                                 classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
@@ -187,26 +191,24 @@ const Ranking = () => {
                             <TableContainer component={Paper}>
                                 <Table className={classes.table} size="small" aria-label="a dense table">
                                     <TableHead>
-                                    <TableRow>
-                                        <TableCell>Nombre de usuario</TableCell>
-                                        <TableCell align="right">Ciudad</TableCell>
-                                        <TableCell align="right">Región</TableCell>
-                                        <TableCell align="right">Experiencia</TableCell>
-                                        <TableCell align="right">Nivel</TableCell>
-                                    </TableRow>
+                                        <TableRow>
+                                            <TableCell className={classes.text}>Nombre de usuario</TableCell>
+                                            <TableCell className={classes.text}>Ciudad</TableCell>
+                                            <TableCell className={classes.text}>Región</TableCell>
+                                            <TableCell className={classes.text}>Experiencia</TableCell>
+                                            <TableCell className={classes.text}>Nivel</TableCell>
+                                        </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                    {rows && rows.map((row) => (
-                                        <TableRow key={row.username}>
-                                        <TableCell component="th" scope="row">
-                                            {row.username}
-                                        </TableCell>
-                                        <TableCell align="right">{row.city}</TableCell>
-                                        <TableCell align="right">{row.region}</TableCell>
-                                        <TableCell align="right">{row.experience}</TableCell>
-                                        <TableCell align="right">{row.level}</TableCell>
-                                        </TableRow>
-                                    ))}
+                                        {rows && rows.map((row) => (
+                                            <TableRow key={row.username}>
+                                                <TableCell component="th" scope="row">{row.username}</TableCell>
+                                                <TableCell>{row.city}</TableCell>
+                                                <TableCell>{row.region}</TableCell>
+                                                <TableCell>{row.experience}</TableCell>
+                                                <TableCell>{row.level}</TableCell>
+                                            </TableRow>
+                                        ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>

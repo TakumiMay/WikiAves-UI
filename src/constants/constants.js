@@ -7,6 +7,8 @@ export const CONFIRM_RESET = "CONFIRM_RESET";
 export const AUTHCHECKINGFINISH = "AUTHCHECKINGFINISH";
 export const GET_RANKING = "GET_RANKING";
 export const GET_REGION_RANKING = "GET_REGION_RANKING";
+export const GET_BIRD = "GET_BIRD";
+export const GET_REGION_BIRD = "GET_REGION_BIRD";
 
 export const HTTP_METHODS = {
     GET: 'GET',

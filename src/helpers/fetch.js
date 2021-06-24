@@ -28,7 +28,7 @@ export const fetchWithToken = ( endpoint, data, method = 'GET' ) => {
             method,
             headers: {
                 'Authorization': `Token ${ token }`
-            }
+            },
         });
     } else {
         return fetch( url , {

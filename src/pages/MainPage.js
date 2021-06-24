@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { notification } from '../helpers/alert';
 import { 
   CssBaseline, 
   InputBase, 
@@ -108,6 +109,7 @@ export default function MainPage() {
     const history = useHistory();
 
     const handleSearch = async(event) => {
+      notification( 'ERROR', "Inicia sesión para realizar búsquedas", 'error' );
       history.push("/login");
     }
     

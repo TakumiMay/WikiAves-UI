@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -6,6 +6,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import SearchIcon from '@material-ui/icons/Search';
 import { logout } from '../actions/auth/actionAuth';
+import { getBird } from '../actions/actionBirds';
 import { useDispatch } from 'react-redux';
 import {
     AppBar,
@@ -82,8 +83,14 @@ export default function TopBar() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [ searchBird, setSearchBird ] = useState("");
 
     const isMenuOpen = Boolean(anchorEl);
+
+    const handleSearch = async(event) => {
+      await dispatch(getBird(searchBird));
+      history.push("/posts");
+    }
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -124,10 +131,6 @@ export default function TopBar() {
       </Menu>
     );
 
-    const handleSearch = async(event) => {
-      event.preventDefault();
-    }
-
     return (
     <div className={classes.grow}>
         <AppBar position="relative">
@@ -145,6 +148,7 @@ export default function TopBar() {
                             root: classes.inputRoot,
                             input: classes.inputInput,
                         }}
+                        onChange={event => {setSearchBird(event.target.value)}}
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
