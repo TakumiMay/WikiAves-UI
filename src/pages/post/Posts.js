@@ -81,12 +81,15 @@ const Posts = (props) => {
         ));
     }
     const handleFilter = async(event) => {
+        console.log(body);
         const response = await fetchWithToken(`posts/birds?search=${filterRegion}`);
-        console.log(response.data);
-        response.json().then(
-            data => setBirds(data)
-        )
-        console.log(birds);
+        const body = response.json();
+        console.log(body);
+        // console.log(response.data);
+        // response.json().then(
+        //     data => setBirds(data)
+        // )
+        // console.log(birds);
     }
 
     useEffect(() => {

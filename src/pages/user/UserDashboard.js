@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import UserInfoBar from "../../components/UserInfoBar";
 import TopBar from "../../components/TopBar";
 import Scoreboard from "../../components/Scoreboard";
+import UserAchievements from "../../components/UserAchievements";
 import {
     Grid,
     Button
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(2, 2, 2),
     },
+    lat: {
+        paddingRight: theme.spacing(4),
+    }
 }));
 
 const UserDashboard = (props) => {
@@ -52,6 +56,7 @@ const UserDashboard = (props) => {
                     sm={9}
                     container
                     direction="column"
+                    className={classes.lat}
                 >
                     <Scoreboard></Scoreboard>
                     <Grid
@@ -77,6 +82,11 @@ const UserDashboard = (props) => {
                         >
                             Ver mis logros
                         </Button>
+                    </Grid>
+                    <Grid 
+                        container
+                    >
+                        <UserAchievements></UserAchievements>
                     </Grid>
                 </Grid>
             </Grid>

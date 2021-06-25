@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'block',
         marginLeft: theme.spacing(1),
         },
+        verticalAlign: 'middle',
+        paddingTop: theme.spacing(1),
     }
 }));
 
