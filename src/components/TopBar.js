@@ -166,13 +166,13 @@ export default function TopBar() {
                         <NotificationsIcon />
                     </Badge>
                 </IconButton> */}
-                <Button
+                {/* <Button
                   type="submit"
                   color="inherit"
                   onClick={handleOpenPosts}
                 >
                   Explora
-                </Button>
+                </Button> */}
                 <IconButton 
                   aria-label="show 17 new notifications" 
                   color="inherit"

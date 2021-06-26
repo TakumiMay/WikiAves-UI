@@ -9,6 +9,8 @@ import ExpeditionCard from "../../components/ExpeditionCard";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { fetchWithToken } from '../../helpers/fetch';
 
+import SightingCard from '../../components/SightingCard';
+
 import { 
     CssBaseline, 
     Grid,
@@ -64,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     },
     space: {
         paddingTop: theme.spacing(2),
+    },
+    spaceLeft: {
+        paddingLeft: theme.spacing(20),
     }
 }));
 
@@ -72,6 +77,8 @@ const Posts = (props) => {
     const [ filterRegion, setFilterRegion ] = useState('');
     const { searchedBird, setSearchedBird } = useState("");
     const [ birds, setBirds ] = useState([]);
+
+    const cards = [1, 2, 3];
 
     const handleSearch = async(event) => {
         expeditionCards = birds && birds.map((bird) => (
@@ -143,10 +150,17 @@ const Posts = (props) => {
                         </Button>
                 </Grid>
                 <Grid 
-                    container
+                    container 
+                    spacing={4}
+                    direction="column"
                     justify="center"
+                    className={classes.spaceLeft}
                 >
-                    { expeditionCards }
+                    {cards.map((card) => (
+                        <Grid item key={card} xs={12} sm={6} md={4}>
+                            <SightingCard />
+                        </Grid>
+                    ))}
                 </Grid>
                 <Grid 
                     container

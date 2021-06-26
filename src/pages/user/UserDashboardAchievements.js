@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import UserInfoBar from "../../components/UserInfoBar";
 import TopBar from "../../components/TopBar";
 import Scoreboard from "../../components/Scoreboard";
-import ExpeditionsContainer from "../../components/ExpeditionsContainer";
+import UserAchievements from "../../components/UserAchievements";
 import {
     Grid,
     Button
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const UserDashboard = () => {
+const UserDashboardAchievements = () => {
     const classes = useStyles();
     const history = useHistory();
 
@@ -88,7 +88,8 @@ const UserDashboard = () => {
                         item
                         container
                     >
-                        <ExpeditionsContainer/>
+                        {console.log("HOLA??????")}
+                        <UserAchievements/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -96,4 +97,4 @@ const UserDashboard = () => {
     );
 }
 
-export default UserDashboard;
+export default UserDashboardAchievements;

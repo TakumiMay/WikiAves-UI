@@ -35,8 +35,8 @@ export default function UserAchievements() {
         response.json().then(
             data =>  setRows(data)
             )
-        console.log("logros "+localStorage.id);
-        console.log(rows);
+        //console.log("logros "+localStorage.id);
+        //console.log(rows);
     }
     loadedUsers();
   }
@@ -47,8 +47,8 @@ export default function UserAchievements() {
             response.json().then(
                 data =>  setRows(data)
                 )
-            console.log("mis logros");
-            console.log(rows);
+            //console.log("mis logros");
+            //console.log(rows);
         }
         loadedUsers();
   }
@@ -59,7 +59,7 @@ export default function UserAchievements() {
         response.json().then(
             data =>  setRows(data)
         )
-        console.log(rows);
+        //console.log(rows);
     }
     loadedAchievements();
   }, []);

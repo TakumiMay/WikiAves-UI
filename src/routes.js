@@ -11,6 +11,7 @@ import UserDashboard from "./pages/user/UserDashboard";
 import SinglePost from "./pages/post/SinglePost";
 import Posts from "./pages/post/Posts";
 import Ranking from "./pages/user/Ranking";
+import UserDashboardAchievements from "./pages/user/UserDashboardAchievements";
 
 export default (
     <BrowserRouter basename="/wikiaves">
@@ -22,11 +23,14 @@ export default (
         <Route path="/signUp" component={RegisterPage} />
 
         <Route path="/profile" component={UserDashboard} />
+        <Route path="/achievements" component={UserDashboardAchievements} />
+        <Route path="/expeditions" component={UserDashboard} />
 
         <Route path="/post" component={SinglePost} />
         <Route path="/posts" component={Posts} />
         <Route path="/ranking" component={Ranking} />
         
+
         <Route path="/underConstructionPage" component={PageInConstruction} />
         <Route path="/testPage" component={TestPage} />
         <Route path="*" component={PageNotFound} />
