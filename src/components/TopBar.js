@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+//import NotificationsIcon from '@material-ui/icons/Notifications';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import SearchIcon from '@material-ui/icons/Search';
 import { logout } from '../actions/auth/actionAuth';
@@ -99,9 +99,9 @@ export default function TopBar() {
     const handleOpenProfile = async(event) => {
       history.push("/profile");
     }
-    const handleOpenPosts = async(event) => {
-      history.push("/posts");
-    }
+    // const handleOpenPosts = async(event) => {
+    //   history.push("/posts");
+    // }
     const handleOpenRanking = async(event) => {
       history.push("/ranking");
     }

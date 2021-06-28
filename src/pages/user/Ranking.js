@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
 import TopBar from "../../components/TopBar";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Table from '@material-ui/core/Table';
@@ -96,7 +95,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Ranking = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const [ filterRegion, setFilterRegion ] = useState('');
     const [rows, setRows] = useState([]);
 

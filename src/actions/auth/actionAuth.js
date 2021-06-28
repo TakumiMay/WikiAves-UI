@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT, AUTHCHECKINGFINISH } from '../../constants/constants';
-import { notification, timerNotification } from "../../helpers/alert";
+import { notification } from "../../helpers/alert";
 import { fetchWithoutToken, fetchWithToken } from "../../helpers/fetch";
 
 export const logout = () => {

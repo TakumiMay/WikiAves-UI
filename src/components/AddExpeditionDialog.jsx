@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
@@ -11,8 +11,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
-import { fetchWithToken } from '../helpers/fetch';
 
 const useStyles = makeStyles((theme) => ({
 formControlLabel: {
@@ -71,7 +69,7 @@ export default function AddExpeditionDialog({ isDialogOpened, handleCloseDialog 
         // response.json().then(
         //     data =>  console.log(data)
         // )
-        
+        console.log("Expedicion agregada")
         
     }
     loadedUsers();
@@ -178,7 +176,7 @@ export default function AddExpeditionDialog({ isDialogOpened, handleCloseDialog 
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleAdd} color="primary">
             Agregar
           </Button>
         </DialogActions>

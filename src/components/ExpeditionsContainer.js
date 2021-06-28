@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from '@material-ui/styles';
-import { useHistory } from "react-router-dom";
 import { fetchWithToken } from "../helpers/fetch";
 import ExpeditionCard from "./ExpeditionCard";
 import SightingCard from "./SightingCard";
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 const ExpeditionsContainer = () => {
 
     const classes = useStyles();
-    const history = useHistory();
     const [ expeditions, setExpeditions ] = useState([]);
     const [ sightings, setSightings ] = useState([]);
 

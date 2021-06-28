@@ -1,6 +1,5 @@
 import { notification } from "../../helpers/alert";
 import { fetchWithoutToken } from "../../helpers/fetch";
-import { REGISTER } from '../../constants/constants';
 
 export const register = (password, name, last_names, username, email, city, region, xp, pages_visited) => {
 
